@@ -1,4 +1,4 @@
-#import "RNPermissionHandlerLocationAccuracy-AppClip.h"
+#import "RNPermissionHandlerLocationAccuracy.h"
 
 @import CoreLocation;
 

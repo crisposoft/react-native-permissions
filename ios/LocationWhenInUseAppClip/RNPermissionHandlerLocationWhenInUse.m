@@ -1,4 +1,4 @@
-#import "RNPermissionHandlerLocationWhenInUse-AppClip.h"
+#import "RNPermissionHandlerLocationWhenInUse.h"
 
 @import CoreLocation;
 

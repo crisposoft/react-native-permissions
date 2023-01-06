@@ -1,4 +1,4 @@
-#import "RNPermissionHandlerLocationAlways-AppClip.h"
+#import "RNPermissionHandlerLocationAlways.h"
 
 @import CoreLocation;
 @import UIKit;
