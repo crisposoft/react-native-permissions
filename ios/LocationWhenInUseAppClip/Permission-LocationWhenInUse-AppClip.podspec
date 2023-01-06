@@ -2,7 +2,7 @@ require 'json'
 package = JSON.parse(File.read('../../package.json'))
 
 Pod::Spec.new do |s|
-  s.name                      = "Permission-LocationWhenInUse"
+  s.name                      = "Permission-LocationWhenInUse-AppClip"
   s.dependency                  "RNPermissions"
 
   s.version                   = package["version"]
