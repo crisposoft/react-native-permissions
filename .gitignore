@@ -59,7 +59,7 @@ buck-out/
 *.jsbundle
 
 # Bob
-dist/
+# dist/
 
 # Ruby / CocoaPods
 example/ios/Pods/
