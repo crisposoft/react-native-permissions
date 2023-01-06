@@ -7,7 +7,7 @@
   "homepage": "https://github.com/zoontek/react-native-permissions#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/zoontek/react-native-permissions.git"
+    "url": "https://github.com/crisposoft/react-native-permissions.git"
   },
   "keywords": [
     "react-native",
@@ -34,6 +34,7 @@
     "lint": "eslint \"./**/*.{js,ts,tsx}\"",
     "setup-hooks": "git config --local core.hooksPath .hooks",
     "prepack": "bob build",
+    "postinstall": "bob build",
     "typecheck": "tsc --project ./ --noEmit"
   },
   "react-native-builder-bob": {
