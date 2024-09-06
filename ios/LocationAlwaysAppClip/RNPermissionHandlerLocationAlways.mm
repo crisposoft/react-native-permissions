@@ -1,7 +1,6 @@
 #import "RNPermissionHandlerLocationAlways.h"
 
-@import CoreLocation;
-@import UIKit;
+#import <CoreLocation/CoreLocation.h>
 
 @interface RNPermissionHandlerLocationAlways() <CLLocationManagerDelegate>
 
@@ -14,10 +13,7 @@
 @implementation RNPermissionHandlerLocationAlways
 
 + (NSArray<NSString *> * _Nonnull)usageDescriptionKeys {
-  return @[
-    @"NSLocationAlwaysAndWhenInUseUsageDescription",
-    @"NSLocationAlwaysUsageDescription",
-  ];
+  return @[@"NSLocationAlwaysAndWhenInUseUsageDescription"];
 }
 
 + (NSString * _Nonnull)handlerUniqueId {
@@ -26,33 +22,16 @@
 
 - (void)checkWithResolver:(void (^ _Nonnull)(RNPermissionStatus))resolve
                  rejecter:(void (__unused ^ _Nonnull)(NSError * _Nonnull))reject {
-  if (![CLLocationManager locationServicesEnabled]) {
-    return resolve(RNPermissionStatusNotAvailable);
-  }
-
-  switch ([CLLocationManager authorizationStatus]) {
-    case kCLAuthorizationStatusNotDetermined:
-      return resolve(RNPermissionStatusNotDetermined);
-    case kCLAuthorizationStatusRestricted:
-      return resolve(RNPermissionStatusRestricted);
-    case kCLAuthorizationStatusAuthorizedWhenInUse:
-    case kCLAuthorizationStatusDenied:
-      return resolve(RNPermissionStatusDenied);
-    case kCLAuthorizationStatusAuthorizedAlways:
-      return resolve(RNPermissionStatusAuthorized);
-  }
+  reject(@"cannot_check_location_always", @"Not available in appclip", nil);
 }
 
 - (void)requestWithResolver:(void (^ _Nonnull)(RNPermissionStatus))resolve
                    rejecter:(void (^ _Nonnull)(NSError * _Nonnull))reject {
-  reject(nil);
+  reject(@"cannot_check_location_always", @"Not available in appclip", nil);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-  if (status != kCLAuthorizationStatusNotDetermined) {
-    [_locationManager setDelegate:nil];
-    [self checkWithResolver:_resolve rejecter:_reject];
-  }
+  reject(@"cannot_check_location_always", @"Not available in appclip", nil);
 }
 
 @end

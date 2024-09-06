@@ -1,6 +1,6 @@
 #import "RNPermissionHandlerLocationWhenInUse.h"
 
-@import CoreLocation;
+#import <CoreLocation/CoreLocation.h>
 
 @interface RNPermissionHandlerLocationWhenInUse() <CLLocationManagerDelegate>
 
@@ -22,33 +22,16 @@
 
 - (void)checkWithResolver:(void (^ _Nonnull)(RNPermissionStatus))resolve
                  rejecter:(void (__unused ^ _Nonnull)(NSError * _Nonnull))reject {
-  if (![CLLocationManager locationServicesEnabled]) {
-    return resolve(RNPermissionStatusNotAvailable);
-  }
-
-  switch ([CLLocationManager authorizationStatus]) {
-    case kCLAuthorizationStatusNotDetermined:
-      return resolve(RNPermissionStatusNotDetermined);
-    case kCLAuthorizationStatusRestricted:
-      return resolve(RNPermissionStatusRestricted);
-    case kCLAuthorizationStatusDenied:
-      return resolve(RNPermissionStatusDenied);
-    case kCLAuthorizationStatusAuthorizedWhenInUse:
-    case kCLAuthorizationStatusAuthorizedAlways:
-      return resolve(RNPermissionStatusAuthorized);
-  }
+  reject(@"cannot_check_location_when_in_use", @"Not available in appclip", nil);
 }
 
 - (void)requestWithResolver:(void (^ _Nonnull)(RNPermissionStatus))resolve
                    rejecter:(void (^ _Nonnull)(NSError * _Nonnull))reject {
-  reject(nil);
+  reject(@"cannot_check_location_when_in_use", @"Not available in appclip", nil);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
-  if (status != kCLAuthorizationStatusNotDetermined) {
-    [_locationManager setDelegate:nil];
-    [self checkWithResolver:_resolve rejecter:_reject];
-  }
+  reject(@"cannot_check_location_when_in_use", @"Not available in appclip", nil);
 }
 
 @end

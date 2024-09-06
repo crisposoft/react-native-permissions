@@ -1,6 +1,6 @@
 #import "RNPermissionHandlerLocationAccuracy.h"
 
-@import CoreLocation;
+#import <CoreLocation/CoreLocation.h>
 
 @interface RNPermissionHandlerLocationAccuracy() <CLLocationManagerDelegate>
 
@@ -28,8 +28,7 @@
 - (void)requestWithPurposeKey:(NSString * _Nonnull)purposeKey
                      resolver:(RCTPromiseResolveBlock _Nonnull)resolve
                      rejecter:(RCTPromiseRejectBlock _Nonnull)reject {
-
-  return reject(@"cannot_request_location_accuracy", @"Not available in appclip", nil);
+  reject(@"cannot_request_location_accuracy", @"Not available in appclip", nil);
 }
 
 @end
