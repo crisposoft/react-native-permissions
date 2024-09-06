@@ -40,17 +40,16 @@ async function requestMultiple(permissions) {
   }
   return output;
 }
-const methods = {
+const methods = exports.methods = {
   check,
   checkLocationAccuracy: _unsupportedPlatformMethods.checkLocationAccuracy,
   checkMultiple,
   checkNotifications,
-  openLimitedPhotoLibraryPicker: _unsupportedPlatformMethods.openLimitedPhotoLibraryPicker,
+  openPhotoPicker: _unsupportedPlatformMethods.openPhotoPicker,
   openSettings,
   request,
   requestLocationAccuracy: _unsupportedPlatformMethods.requestLocationAccuracy,
   requestMultiple,
   requestNotifications: checkNotifications
 };
-exports.methods = methods;
 //# sourceMappingURL=methods.windows.js.map

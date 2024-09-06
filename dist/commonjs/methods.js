@@ -21,17 +21,16 @@ async function checkMultiple(permissions) {
     return acc;
   }, {});
 }
-const methods = {
+const methods = exports.methods = {
   check,
   checkLocationAccuracy: _unsupportedPlatformMethods.checkLocationAccuracy,
   checkMultiple,
   checkNotifications,
-  openLimitedPhotoLibraryPicker: _unsupportedPlatformMethods.openLimitedPhotoLibraryPicker,
+  openPhotoPicker: _unsupportedPlatformMethods.openPhotoPicker,
   openSettings: Promise.reject,
   request: check,
   requestLocationAccuracy: _unsupportedPlatformMethods.requestLocationAccuracy,
   requestMultiple: checkMultiple,
   requestNotifications: checkNotifications
 };
-exports.methods = methods;
 //# sourceMappingURL=methods.js.map

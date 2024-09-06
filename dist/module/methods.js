@@ -1,5 +1,7 @@
+"use strict";
+
 import { RESULTS } from './results';
-import { checkLocationAccuracy, openLimitedPhotoLibraryPicker, requestLocationAccuracy } from './unsupportedPlatformMethods';
+import { checkLocationAccuracy, openPhotoPicker, requestLocationAccuracy } from './unsupportedPlatformMethods';
 async function check() {
   return RESULTS.UNAVAILABLE;
 }
@@ -20,7 +22,7 @@ export const methods = {
   checkLocationAccuracy,
   checkMultiple,
   checkNotifications,
-  openLimitedPhotoLibraryPicker,
+  openPhotoPicker,
   openSettings: Promise.reject,
   request: check,
   requestLocationAccuracy,

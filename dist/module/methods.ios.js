@@ -1,4 +1,6 @@
-import NativeModule from './NativePermissionsModule';
+"use strict";
+
+import NativeModule from './NativeRNPermissions';
 import { RESULTS } from './results';
 import { uniq } from './utils';
 let available = undefined;
@@ -8,19 +10,17 @@ function getAvailable() {
   }
   return available;
 }
-async function openLimitedPhotoLibraryPicker() {
-  await NativeModule.openLimitedPhotoLibraryPicker();
+async function openPhotoPicker() {
+  await NativeModule.openPhotoPicker();
 }
 async function openSettings() {
   await NativeModule.openSettings();
 }
 async function check(permission) {
-  var _getAvailable;
-  return (_getAvailable = getAvailable()) !== null && _getAvailable !== void 0 && _getAvailable.includes(permission) ? NativeModule.check(permission) : RESULTS.UNAVAILABLE;
+  return getAvailable().includes(permission) ? NativeModule.check(permission) : RESULTS.UNAVAILABLE;
 }
 async function request(permission) {
-  var _getAvailable2;
-  return (_getAvailable2 = getAvailable()) !== null && _getAvailable2 !== void 0 && _getAvailable2.includes(permission) ? NativeModule.request(permission) : RESULTS.UNAVAILABLE;
+  return getAvailable().includes(permission) ? NativeModule.request(permission) : RESULTS.UNAVAILABLE;
 }
 function checkLocationAccuracy() {
   return NativeModule.checkLocationAccuracy();
@@ -56,7 +56,7 @@ export const methods = {
   checkLocationAccuracy,
   checkMultiple,
   checkNotifications,
-  openLimitedPhotoLibraryPicker,
+  openPhotoPicker,
   openSettings,
   request,
   requestLocationAccuracy,

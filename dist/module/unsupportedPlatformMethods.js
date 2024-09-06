@@ -1,3 +1,5 @@
+"use strict";
+
 const IOS_14 = 'Only supported by iOS 14 and above';
 export async function checkLocationAccuracy() {
   throw new Error(IOS_14);
@@ -5,7 +7,7 @@ export async function checkLocationAccuracy() {
 export async function requestLocationAccuracy(_options) {
   throw new Error(IOS_14);
 }
-export async function openLimitedPhotoLibraryPicker() {
+export async function openPhotoPicker() {
   throw new Error(IOS_14);
 }
 //# sourceMappingURL=unsupportedPlatformMethods.js.map

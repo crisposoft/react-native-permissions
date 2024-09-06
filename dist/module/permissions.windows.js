@@ -1,3 +1,5 @@
+"use strict";
+
 const WINDOWS = Object.freeze({
   ACCESSORY_MANAGER: 'windows.permission.accessoryManager',
   ACTIVITY: 'windows.permission.activity',

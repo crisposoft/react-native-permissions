@@ -6,42 +6,40 @@ Object.defineProperty(exports, "__esModule", {
 exports.checkNotifications = checkNotifications;
 exports.methods = void 0;
 exports.requestNotifications = requestNotifications;
-var _NativePermissionsModule = _interopRequireDefault(require("./NativePermissionsModule"));
+var _NativeRNPermissions = _interopRequireDefault(require("./NativeRNPermissions"));
 var _results = require("./results");
 var _utils = require("./utils");
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 let available = undefined;
 function getAvailable() {
   if (available == null) {
-    available = _NativePermissionsModule.default.getConstants().available;
+    available = _NativeRNPermissions.default.getConstants().available;
   }
   return available;
 }
-async function openLimitedPhotoLibraryPicker() {
-  await _NativePermissionsModule.default.openLimitedPhotoLibraryPicker();
+async function openPhotoPicker() {
+  await _NativeRNPermissions.default.openPhotoPicker();
 }
 async function openSettings() {
-  await _NativePermissionsModule.default.openSettings();
+  await _NativeRNPermissions.default.openSettings();
 }
 async function check(permission) {
-  var _getAvailable;
-  return (_getAvailable = getAvailable()) !== null && _getAvailable !== void 0 && _getAvailable.includes(permission) ? _NativePermissionsModule.default.check(permission) : _results.RESULTS.UNAVAILABLE;
+  return getAvailable().includes(permission) ? _NativeRNPermissions.default.check(permission) : _results.RESULTS.UNAVAILABLE;
 }
 async function request(permission) {
-  var _getAvailable2;
-  return (_getAvailable2 = getAvailable()) !== null && _getAvailable2 !== void 0 && _getAvailable2.includes(permission) ? _NativePermissionsModule.default.request(permission) : _results.RESULTS.UNAVAILABLE;
+  return getAvailable().includes(permission) ? _NativeRNPermissions.default.request(permission) : _results.RESULTS.UNAVAILABLE;
 }
 function checkLocationAccuracy() {
-  return _NativePermissionsModule.default.checkLocationAccuracy();
+  return _NativeRNPermissions.default.checkLocationAccuracy();
 }
 function requestLocationAccuracy(options) {
-  return _NativePermissionsModule.default.requestLocationAccuracy(options.purposeKey);
+  return _NativeRNPermissions.default.requestLocationAccuracy(options.purposeKey);
 }
 function checkNotifications() {
-  return _NativePermissionsModule.default.checkNotifications();
+  return _NativeRNPermissions.default.checkNotifications();
 }
 function requestNotifications(options) {
-  return _NativePermissionsModule.default.requestNotifications(options);
+  return _NativeRNPermissions.default.requestNotifications(options);
 }
 async function checkMultiple(permissions) {
   const output = {};
@@ -60,17 +58,16 @@ async function requestMultiple(permissions) {
   }
   return output;
 }
-const methods = {
+const methods = exports.methods = {
   check,
   checkLocationAccuracy,
   checkMultiple,
   checkNotifications,
-  openLimitedPhotoLibraryPicker,
+  openPhotoPicker,
   openSettings,
   request,
   requestLocationAccuracy,
   requestMultiple,
   requestNotifications
 };
-exports.methods = methods;
 //# sourceMappingURL=methods.ios.js.map

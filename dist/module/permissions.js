@@ -1,3 +1,5 @@
+"use strict";
+
 export const PERMISSIONS = Object.freeze({
   ANDROID: {},
   IOS: {},
