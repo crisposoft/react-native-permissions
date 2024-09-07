@@ -47,32 +47,31 @@ def setup_permissions(config)
     log_warning("Unknown permissions: #{unknown_permissions.join(', ')}")
   end
 
-  source_files = [
-    '"ios/*.{h,mm}"',
-    *directories.map { |name| "\"ios/#{name}/*.{h,mm}\"" }
-  ].join(', ')
+  directories.each do |directory|
+    source_files = [
+      '"*.{h,mm}"',
+      # other files
+    ].join(', ')
 
-  frameworks = directories
-    .reduce([]) do |acc, dir|
-    arr = permissions_frameworks[dir]
-    arr ? acc.concat(arr) : acc
+    frameworks = (permissions_frameworks[directory] || [])
+      .map { |name| "\"#{name}\"" }.join(', ')
+
+    podspec_template_path = File.join(module_dir, 'setup', 'podspec.template')
+    podspec_template = File.read(podspec_template_path)
+
+    podspec_content = podspec_template
+      .gsub(/(# *)?s\.name *=.*/, "s.name = \"Permission-#{directory}\"")
+      .gsub(/(# *)?s\.source_files *=.*/, "s.source_files = #{source_files}")
+      .gsub(/(# *)?s\.frameworks *=.*/,
+        frameworks.length > 0 ?
+        "s.frameworks = #{frameworks}" :
+        '# s.frameworks = <frameworks>')
+      .gsub(/(# *)?s\.resource_bundles *=.*/, 
+        directory == 'FaceID' ? 
+        "s.resource_bundles = { 'RNPermissionsPrivacyInfo' => 'ios/PrivacyInfo.xcprivacy' }" : 
+        '# s.resource_bundles = <resource_bundles>')
+
+    podspec_path = File.join(module_dir, "ios", directory, "Permission-#{directory}.podspec")
+    File.write(podspec_path, podspec_content)
   end
-    .map { |name| "\"#{name}\"" }
-    .uniq
-    .join(', ')
-
-  podspec_path = File.join(module_dir, 'RNPermissions.podspec')
-  podspec = File.read(podspec_path)
-
-  podspec_content = podspec
-    .gsub(/(# *)?s\.source_files *=.*/, "s.source_files = #{source_files}")
-    .gsub(/(# *)?s\.frameworks *=.*/, "s.frameworks = #{frameworks}")
-    .gsub(
-      /(# *)?s\.resource_bundles *=.*/,
-      directories.include?('FaceID') ?
-        "s.resource_bundles = { 'RNPermissionsPrivacyInfo' => 'ios/PrivacyInfo.xcprivacy' }" :
-        '# s.resource_bundles = <resource_bundles>'
-    )
-
-  File.write(podspec_path, podspec_content)
 end
