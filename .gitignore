@@ -45,7 +45,7 @@ yarn-error.log
 *.jsbundle
 
 # Bob
-dist/
+# dist/
 
 # Ruby / CocoaPods
 **/Pods/
